@@ -112,7 +112,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  */
 function repeatString(value, count) {
   let result = '';
-  for (let i = 0; i <= count; i += 1) {
+  for (let i = 0; i < count; i += 1) {
     result += value;
   }
   return result;
