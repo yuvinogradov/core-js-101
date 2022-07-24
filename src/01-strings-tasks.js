@@ -111,11 +111,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-  let result = '';
-  for (let i = 0; i < count; i += 1) {
-    result += value;
-  }
-  return result;
+  return value.repeat(count);
 }
 
 /**
@@ -255,7 +251,7 @@ function encodeToRot13(str) {
   let result = '';
 
   for (let i = 0; i < str.length; i += 1) {
-    result += output[input.indexOf(str[i])];
+    result += input.indexOf(str[i]) >= 0 ? output[input.indexOf(str[i])] : str[i];
   }
   return result;
 }

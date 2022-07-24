@@ -103,13 +103,16 @@ describe('04-date-tasks', () => {
       }, {
         date: Date.UTC(2016, 3, 5, 6, 0),
         expected: Math.PI, // 180 deg
-      }, {
+      },
+      {
         date: Date.UTC(2016, 3, 5, 18, 0),
         expected: Math.PI, // 180 deg
-      }, {
+      },
+      {
         date: Date.UTC(2016, 3, 5, 9, 0),
         expected: Math.PI / 2, // 90 deg
-      }, {
+      },
+      {
         date: Date.UTC(2016, 3, 5, 21, 0),
         expected: Math.PI / 2, // 90 deg
       }, {
