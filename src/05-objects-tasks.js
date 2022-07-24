@@ -117,24 +117,29 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
+  str: '',
+
+  element(el) {
+    this.str += el;
+    return this;
+  },
+  stringify() {
+    return this.str;
+  },
+  id(value) {
+    this.str += `#${value}`;
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
+  class(value) {
+    this.str += `.${value}`;
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
+  attr(value) {
+    this.str += `[${value}]`;
   },
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
-  },
-
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
+  pseudoClass(value) {
+    this.str += `:${value}`;
   },
 
   pseudoElement(/* value */) {
@@ -145,6 +150,37 @@ const cssSelectorBuilder = {
     throw new Error('Not implemented');
   },
 };
+
+
+// const cssSelectorBuilder = {
+//   element(/* value */) {
+//     throw new Error('Not implemented');
+//   },
+
+//   id(/* value */) {
+//     throw new Error('Not implemented');
+//   },
+
+//   class(/* value */) {
+//     throw new Error('Not implemented');
+//   },
+
+//   attr(/* value */) {
+//     throw new Error('Not implemented');
+//   },
+
+//   pseudoClass(/* value */) {
+//     throw new Error('Not implemented');
+//   },
+
+//   pseudoElement(/* value */) {
+//     throw new Error('Not implemented');
+//   },
+
+//   combine(/* selector1, combinator, selector2 */) {
+//     throw new Error('Not implemented');
+//   },
+// };
 
 
 module.exports = {
