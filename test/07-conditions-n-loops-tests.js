@@ -120,7 +120,8 @@ describe('08-conditions-n-loops-tasks', () => {
           top: 5, left: 5, width: 10, height: 10,
         },
         expected: true,
-      }, {
+      },
+      {
         rect1: {
           top: 10, left: 10, width: 10, height: 10,
         },
@@ -128,7 +129,9 @@ describe('08-conditions-n-loops-tasks', () => {
           top: 5, left: 5, width: 15, height: 15,
         },
         expected: true,
-      }, {
+      },
+
+      {
         rect1: {
           top: 10, left: 10, width: 50, height: 5,
         },
