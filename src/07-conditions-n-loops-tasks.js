@@ -393,8 +393,25 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(paths) {
+  let res = paths[0];
+  let slashPos = 0;
+  for (let i = 1; i < paths.length; i += 1) {
+    const path = paths[i];
+    let temp = '';
+
+    for (let j = 0; j < res.length; j += 1) {
+      if (j >= path.length) break;
+      if (path[j] === '/') slashPos = j;
+      if (path[j] === res[j]) temp += path[j];
+      else break;
+    }
+    res = temp;
+  }
+
+  if (res.length > 0) res = res.slice(0, slashPos + 1);
+
+  return res;
 }
 
 
@@ -416,10 +433,27 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
-}
 
+function getMatrixProduct(m1, m2) {
+  const rows1 = m1.length;
+  const cols1 = Array.isArray(m1[0]) ? m1[0].length : 1;
+  // const rows2 = m2.length;
+  const cols2 = Array.isArray(m2[0]) ? m2[0].length : 1;
+
+  const c = [];
+
+  for (let i = 0; i < rows1; i += 1) { c[i] = []; }
+  for (let k = 0; k < cols2; k += 1) {
+    for (let i = 0; i < rows1; i += 1) {
+      let temp = 0;
+      for (let j = 0; j < cols1; j += 1) {
+        temp += m1[i][j] * m2[j][k];
+        c[i][k] = temp;
+      }
+    }
+  }
+  return c;
+}
 
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
@@ -451,10 +485,47 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
-}
 
+function evaluateTicTacToePosition(p) {
+  const size = p.length;
+
+  // rows
+  for (let i = 0; i < size; i += 1) {
+    let first;
+
+    for (let j = 0; j < size; j += 1) {
+      const val = p[i][j];
+      if (j === 0) { first = val; }
+      if (val !== first) {
+        break;
+      }
+
+      if (j === size - 1 && val === first && val !== undefined) return first;
+    }
+  }
+
+  // cols
+  for (let i = 0; i < size; i += 1) {
+    let first;
+
+    for (let j = 0; j < size; j += 1) {
+      const val = p[j][i];
+      if (j === 0) { first = val; }
+
+      if (val !== first) {
+        break;
+      }
+
+      if (j === size - 1 && val === first) return first;
+    }
+  }
+
+  // diags
+  if (p[0][0] === p[1][1] && p[1][1] === p[2][2]) return p[1][1];
+  if (p[0][2] === p[1][1] && p[1][1] === p[2][0]) return p[1][1];
+
+  return undefined;
+}
 
 module.exports = {
   getFizzBuzz,
